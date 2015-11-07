@@ -1,13 +1,25 @@
 [package]
 
-name = "grust-proof"
-version = "0.0.1-dev"
+name = "gio-2-0-sys"
+version = "0.47.0-dev"
 authors = ["Mikhail Zabaluev <mikhail.zabaluev@gmail.com>"]
 license = "LGPL-2.1+"
-readme = "README.md"
 
-[dependencies.grust]
-git = "https://github.com/gi-rust/grust.git"
+links = "gio-2.0"
 
-[dependencies.grust-gio-2-0]
-path = "fake-gen/gio"
+build = "build.rs"
+
+[lib]
+path = "lib.rs"
+
+[build-dependencies]
+pkg-config = "0.3"
+
+[dependencies]
+gtypes = "0.2"
+
+[dependencies.glib-2-0-sys]
+git = "https://github.com/gi-rust/glib-sys.git"
+
+[dependencies.gobject-2-0-sys]
+git = "https://github.com/gi-rust/gobject-sys.git"
