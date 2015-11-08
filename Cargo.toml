@@ -5,7 +5,7 @@ authors = ["Mikhail Zabaluev <mikhail.zabaluev@gmail.com>"]
 description = "Import crate for Gio"
 license = "LGPL-2.1+"
 readme = "README.md"
-keywords = ["GLib", "GNOME", "I/O", "async"]
+keywords = ["GLib", "GNOME", "IO", "async"]
 
 repository = "https://github.com/gi-rust/gio-sys.git"
 
