@@ -3,9 +3,6 @@
 from grust.mapping import Module
 from grust.namematch import MatchList
 
-# The GType symbols are in libgobject
-ignore_gtype_functions = True
-
 suppress_c_names = MatchList(
     # System-specific definitions, custom-defined below
     "GSocketFamily",
