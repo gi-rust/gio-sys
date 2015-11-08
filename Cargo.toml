@@ -1,6 +1,6 @@
 [package]
 name = "gio-2-0-sys"
-version = "0.47.0-dev"
+version = "0.46.3-dev"
 authors = ["Mikhail Zabaluev <mikhail.zabaluev@gmail.com>"]
 description = "Import crate for Gio"
 license = "LGPL-2.1+"
@@ -21,9 +21,5 @@ pkg-config = "0.3"
 [dependencies]
 gtypes = "0.2"
 libc = "0.2"
-
-[dependencies.glib-2-0-sys]
-git = "https://github.com/gi-rust/glib-sys.git"
-
-[dependencies.gobject-2-0-sys]
-git = "https://github.com/gi-rust/gobject-sys.git"
+glib-2-0-sys = "0.46"
+gobject-2-0-sys = "0.46"
