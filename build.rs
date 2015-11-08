@@ -1,5 +1,7 @@
 extern crate pkg_config;
 
+use pkg_config::Config;
+
 fn main() {
-    pkg_config::find_library("gio-2.0").unwrap();
+    Config::new().atleast_version("2.47").find("gio-2.0").unwrap();
 }

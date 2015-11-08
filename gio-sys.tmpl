@@ -1,0 +1,69 @@
+<%!
+
+from grust.mapping import Module
+from grust.namematch import MatchList
+
+# The GType symbols are in libgobject
+ignore_gtype_functions = True
+
+suppress_c_names = MatchList(
+    # System-specific definitions, custom-defined below
+    "GSocketFamily",
+    "GSocketMsgFlags",
+)
+
+modules = [
+    Module(
+        cfg = 'unix',
+        name = 'unix',
+        ctypes_match = MatchList(
+            "GDesktopAppInfo*",
+            "GFileDescriptorBased*",
+            "GUnix*"
+        ),
+        symbols_match = MatchList(
+            "g_credentials_get_unix_*",
+            "g_desktop_app_info*",
+            "g_file_descriptor_based*",
+            "g_subprocess_launcher_set_child_setup",
+            "g_subprocess_launcher_set_stdin_file_path",
+            "g_subprocess_launcher_set_stdout_file_path",
+            "g_subprocess_launcher_set_stderr_file_path",
+            "g_subprocess_launcher_take_fd",
+            "g_subprocess_launcher_take_stdin_fd",
+            "g_subprocess_launcher_take_stdout_fd",
+            "g_subprocess_launcher_take_stderr_fd",
+            "g_subprocess_send_signal",
+            "g_unix_*",
+        )
+    ),
+]
+
+%>\
+<%inherit file="/sys/crate.tmpl"/>
+
+<%block name="custom_types">
+#[repr(C)]
+pub enum GSocketFamily {
+    Invalid = 0,
+    Unix = glib::GLIB_SYSDEF_AF_UNIX as isize,
+    IPv4 = glib::GLIB_SYSDEF_AF_INET as isize,
+    IPv6 = glib::GLIB_SYSDEF_AF_INET6 as isize,
+}
+pub const G_SOCKET_FAMILY_INVALID: GSocketFamily = GSocketFamily::Invalid;
+pub const G_SOCKET_FAMILY_UNIX:    GSocketFamily = GSocketFamily::Unix;
+pub const G_SOCKET_FAMILY_IPV4:    GSocketFamily = GSocketFamily::IPv4;
+pub const G_SOCKET_FAMILY_IPV6:    GSocketFamily = GSocketFamily::IPv6;
+
+#[repr(C)]
+pub enum GSocketMsgFlags {
+    None      = 0,
+    Oob       = glib::GLIB_SYSDEF_MSG_OOB as isize,
+    Peek      = glib::GLIB_SYSDEF_MSG_PEEK as isize,
+    DontRoute = glib::GLIB_SYSDEF_MSG_DONTROUTE as isize,
+}
+pub const G_SOCKET_MSG_NONE:      guint = 0;
+pub const G_SOCKET_MSG_OOB:       guint = glib::GLIB_SYSDEF_MSG_OOB as guint;
+pub const G_SOCKET_MSG_PEEK:      guint = glib::GLIB_SYSDEF_MSG_PEEK as guint;
+pub const G_SOCKET_MSG_DONTROUTE: guint = glib::GLIB_SYSDEF_MSG_DONTROUTE as guint;
+</%block>
